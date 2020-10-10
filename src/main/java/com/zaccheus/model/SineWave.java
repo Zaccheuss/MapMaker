@@ -16,7 +16,7 @@ public class SineWave {
     private double phase;
     private int numberOfDataPoints;
     private int start;
-    private int end;
+    private final int end;
 
     public SineWave() {
         this(DEFAULT_AMP, DEFAULT_FREQ, DEFAULT_PHASE, DEFAULT_POINTS, DEFAULT_START, DEFAULT_END);

@@ -1,6 +1,7 @@
 package com.zaccheus;
 
 import com.zaccheus.model.SineWave;
+import com.zaccheus.model.WaveGenerator;
 import com.zaccheus.writer.WaveWriter;
 
 public class Application {
@@ -15,7 +16,9 @@ public class Application {
                 1
         );
 
-        WaveWriter.printWaveToConsoleHorizontally(wave.generateOutputArray());
+        WaveGenerator waveGen = new WaveGenerator();
+
+        WaveWriter.printWaveToConsoleHorizontally(waveGen.combineWaves());
     }
 
 }
