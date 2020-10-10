@@ -7,7 +7,7 @@ public class SineWave {
     private static final double DEFAULT_AMP = 10;
     private static final double DEFAULT_FREQ = 1;
     private static final double DEFAULT_PHASE = 0;
-    private static final int DEFAULT_POINTS = 20;
+    private static final int DEFAULT_POINTS = 200;
     private static final int DEFAULT_START = 0;
     private static final int DEFAULT_END = 2;
 

@@ -32,7 +32,6 @@ public final class WaveWriter {
                 }
             }
         }
-
         return transpose(waveForPrinting);
     }
 

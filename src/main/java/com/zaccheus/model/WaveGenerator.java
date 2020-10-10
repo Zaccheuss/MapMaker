@@ -1,16 +1,16 @@
 package com.zaccheus.model;
 
-public class WaveGenerator {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-    SineWave wave1 = new SineWave(80, 2, 5, 200, 0, 1);
-    SineWave wave2 = new SineWave(40, 4, 9, 200, 0, 1);
-    SineWave wave3 = new SineWave(30, 8, 0, 200, 0, 1);
-    SineWave wave4 = new SineWave(10, 16, 2, 200, 0, 1);
+public class WaveGenerator {
+    private static final int NUMBER_OF_POINTS = 200;
 
     private static final double DEFAULT_LACUNARITY = 2;
     private static final double DEFAULT_PERSISTENCE = 0.5;
     private static final int DEFAULT_OCTAVES = 4;
-    private static final int DEFAULT_SCALE = 1;
+    private static final int DEFAULT_SCALE = 60;
 
     private double lacunarity;  //Controls increase in frequency per octave
     private double persistence; //Controls decrease in amplitude per octave
@@ -29,16 +29,34 @@ public class WaveGenerator {
     }
 
     public double[] combineWaves() {
-        double[] output = new double[wave1.generateOutputArray().length];
-
+        double[] output = new double[NUMBER_OF_POINTS];
+        List<double[]> waveList = generateWaves();
+        //Sum all arrays
+        for (double[] wave : waveList) {
+            for (int i = 0; i < output.length; i++) {
+                output[i] += wave[i];
+            }
+        }
+        //Get the average of
         for (int i = 0; i < output.length; i++) {
-            output[i] = (wave1.generateOutputArray()[i] +
-                    wave2.generateOutputArray()[i] +
-                    wave3.generateOutputArray()[i] +
-                    wave4.generateOutputArray()[i]) / 4;
+            output[i] /= octaves;
+            output[i] *= scale; //Needs to be scaled up in order to print to console
         }
 
         return output;
+    }
+
+    public List<double[]> generateWaves() {
+        double[] freqArr = generateFrequencyArray();
+        double[] ampArr = generateAmplitudeArray();
+        int[] phaseArr = generatePhaseArray();
+
+        List<double[]> waveList = new ArrayList<>();
+
+        for (int i = 0; i < octaves; i++) {
+            waveList.add(new SineWave(ampArr[i], freqArr[i], phaseArr[i]).generateOutputArray());
+        }
+        return waveList;
     }
 
     public double[] generateFrequencyArray() {
@@ -57,6 +75,17 @@ public class WaveGenerator {
         return ampArr;
     }
 
+    public int[] generatePhaseArray() {
+        int[] phaseArr = new int[octaves];
+        Random rand = new Random();
+        for (int i = 0; i < octaves; i++) {
+            phaseArr[i] = rand.nextInt(100);
+        }
+        return phaseArr;
+    }
+
+
+    //Setters
     public void setLacunarity(double lacunarity) {
         this.lacunarity = lacunarity;
     }
