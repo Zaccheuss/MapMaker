@@ -31,6 +31,18 @@ public final class ArrayTools {
         return max;
     }
 
+    private double findArrayMax(double[][] noiseArray) {
+        double max = noiseArray[0][0];
+        for (int x = 0; x < noiseArray.length; x++) {
+            for (int y = 0; y < noiseArray[1].length; y++) {
+                if (noiseArray[x][y] > max) {
+                    max = noiseArray[x][y];
+                }
+            }
+        }
+        return max;
+    }
+
     public static double findArrayMin(double[] data) {
         double min = data[0];
         for (int i = 0; i < data.length; i++) {
@@ -46,6 +58,18 @@ public final class ArrayTools {
         for (int i = 0; i < data.length; i++) {
             if (data[i] < min) {
                 min = data[i];
+            }
+        }
+        return min;
+    }
+
+    private double findArrayMin(double[][] noiseArray) {
+        double min = noiseArray[0][0];
+        for (int x = 0; x < noiseArray.length; x++) {
+            for (int y = 0; y < noiseArray[1].length; y++) {
+                if (noiseArray[x][y] < min) {
+                    min = noiseArray[x][y];
+                }
             }
         }
         return min;
