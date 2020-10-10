@@ -1,12 +1,14 @@
 package com.zaccheus.model;
 
+import com.zaccheus.util.ArrayTools;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class WaveGenerator {
-    private static final int NUMBER_OF_POINTS = 200;
+public class NoiseGenerator {
 
+    private static final int DEFAULT_WIDTH = 100;
+    private static final int DEFAULT_HEIGHT = 100;
     private static final double DEFAULT_LACUNARITY = 2;
     private static final double DEFAULT_PERSISTENCE = 0.5;
     private static final int DEFAULT_OCTAVES = 5;
@@ -16,47 +18,54 @@ public class WaveGenerator {
     private double persistence; //Controls decrease in amplitude per octave
     private int octaves;
     private int scale;
+    private int height;
+    private int width;
 
-    public WaveGenerator() {
-        this(DEFAULT_LACUNARITY, DEFAULT_PERSISTENCE, DEFAULT_OCTAVES, DEFAULT_SCALE);
+    public NoiseGenerator() {
+        this(DEFAULT_LACUNARITY, DEFAULT_PERSISTENCE, DEFAULT_OCTAVES, DEFAULT_SCALE,
+                DEFAULT_HEIGHT, DEFAULT_WIDTH);
     }
 
-    public WaveGenerator(double lacunarity, double persistence, int octaves, int scale) {
-        setLacunarity(lacunarity);
-        setPersistence(persistence);
-        setOctaves(octaves);
-        setScale(scale);
+    public NoiseGenerator(double lacunarity, double persistence, int octaves, int scale, int height, int width) {
+        this.lacunarity = lacunarity;
+        this.persistence = persistence;
+        this.octaves = octaves;
+        this.scale = scale;
+        this.height = height;
+        this.width = width;
     }
 
-    public double[] combineWaves() {
-        double[] output = new double[NUMBER_OF_POINTS];
-        List<double[]> waveList = generateWaves();
+    public double[][] combineArrays() {
+        double[][] output = new double[height][width];
+        List<double[][]> mapList = generateMaps();
         //Sum all arrays
-        for (double[] wave : waveList) {
-            for (int i = 0; i < output.length; i++) {
-                output[i] += wave[i];
+        for (double[][] map : mapList) {
+            for (int i = 0; i < output.length; i++) { //Loop through height
+                for (int j = 0; j < output[0].length; j++) { //Loop through width
+                    output[i][j] += map[i][j];
+                }
             }
         }
-        //Get the average of each point
-        for (int i = 0; i < output.length; i++) {
-            output[i] /= octaves;
-            output[i] *= scale; //Needs to be scaled up in order to print to console
+        //Get average of each point
+        for (int i = 0; i < output.length; i++) { //Loop through height
+            for (int j = 0; j < output[0].length; j++) { //Loop through width
+                output[i][j] /= octaves;
+            }
         }
+        ArrayTools.normalizeData(output, 1);
 
         return output;
     }
 
-    public List<double[]> generateWaves() {
+    private List<double[][]> generateMaps() {
         double[] freqArr = generateFrequencyArray();
         double[] ampArr = generateAmplitudeArray();
-        int[] phaseArr = generatePhaseArray();
 
-        List<double[]> waveList = new ArrayList<>();
-
+        List<double[][]> mapList = new ArrayList<>();
         for (int i = 0; i < octaves; i++) {
-            waveList.add(new SineWave(ampArr[i], freqArr[i], phaseArr[i]).generateOutputArray());
+            mapList.add(new NoiseMap(ampArr[i], freqArr[i], scale, height, width).generateOutputArray());
         }
-        return waveList;
+        return mapList;
     }
 
     public double[] generateFrequencyArray() {
@@ -74,16 +83,6 @@ public class WaveGenerator {
         }
         return ampArr;
     }
-
-    public int[] generatePhaseArray() {
-        int[] phaseArr = new int[octaves];
-        Random rand = new Random();
-        for (int i = 0; i < octaves; i++) {
-            phaseArr[i] = rand.nextInt(100);
-        }
-        return phaseArr;
-    }
-
 
     //Setters
     public void setLacunarity(double lacunarity) {
