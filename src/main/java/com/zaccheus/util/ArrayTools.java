@@ -11,6 +11,18 @@ public final class ArrayTools {
         return normalizedData;
     }
 
+    public static double[][] normalizeData(double[][] data, double newMaxValue) {
+        double[][] normalizedData = new double[data.length][data[0].length];
+        double max = findArrayMax(data);
+        double min = findArrayMin(data);
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
+                normalizedData[i][j] = newMaxValue * (data[i][j] - min) / (max - min);
+            }
+        }
+        return normalizedData;
+    }
+
     public static double findArrayMax(double[] data) {
         double max = data[0];
         for (int i = 0; i < data.length; i++) {
@@ -31,7 +43,7 @@ public final class ArrayTools {
         return max;
     }
 
-    private double findArrayMax(double[][] noiseArray) {
+    private static double findArrayMax(double[][] noiseArray) {
         double max = noiseArray[0][0];
         for (int x = 0; x < noiseArray.length; x++) {
             for (int y = 0; y < noiseArray[1].length; y++) {
@@ -63,7 +75,7 @@ public final class ArrayTools {
         return min;
     }
 
-    private double findArrayMin(double[][] noiseArray) {
+    private static double findArrayMin(double[][] noiseArray) {
         double min = noiseArray[0][0];
         for (int x = 0; x < noiseArray.length; x++) {
             for (int y = 0; y < noiseArray[1].length; y++) {
