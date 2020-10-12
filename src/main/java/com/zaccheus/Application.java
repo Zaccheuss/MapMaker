@@ -16,8 +16,8 @@ public class Application {
                 .4,
                 4,
                 160,
-                500,
-                500);
+                1000,
+                1000);
         MapWriter.generateColorImage(gen.combineArrays());
     }
 

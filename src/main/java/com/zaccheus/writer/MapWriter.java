@@ -26,14 +26,18 @@ public final class MapWriter {
                     data[x][y] = 0;
                 }
 
-                if (data[x][y] < 0.40) {
+                if (data[x][y] < 0.30) {
                     image.setRGB(x, y, new Color(0, 1, 137).getRGB());
-                } else if (data[x][y] < 0.44) {
+                } else if (data[x][y] < 0.38) {
                     image.setRGB(x, y, new Color(25, 41, 227).getRGB());
+                }  else if (data[x][y] < 0.44) {
+                    image.setRGB(x, y, new Color(48, 64, 220).getRGB());
                 } else if (data[x][y] < 0.46) {
                     image.setRGB(x, y, new Color(227, 222, 88).getRGB());
                 } else if (data[x][y] < 0.60) {
                     image.setRGB(x, y, new Color(7, 168, 0).getRGB());
+                } else if (data[x][y] < 0.65) {
+                    image.setRGB(x, y, new Color(78, 69, 31, 255).getRGB());
                 } else if (data[x][y] < 0.7) {
                     image.setRGB(x, y, new Color(97, 94, 94, 255).getRGB());
                 } else if (data[x][y] < 0.8) {
