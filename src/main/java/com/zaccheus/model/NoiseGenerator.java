@@ -27,10 +27,10 @@ public class NoiseGenerator {
     }
 
     public NoiseGenerator(double lacunarity, double persistence, int octaves, int scale, int height, int width) {
-        this.lacunarity = lacunarity;
-        this.persistence = persistence;
-        this.octaves = octaves;
-        this.scale = scale;
+        setLacunarity(lacunarity);
+        setPersistence(persistence);
+        setOctaves(octaves);
+        setScale(scale);
         this.height = height;
         this.width = width;
     }
@@ -46,14 +46,8 @@ public class NoiseGenerator {
                 }
             }
         }
-        //Get average of each point
-        for (int i = 0; i < output.length; i++) { //Loop through height
-            for (int j = 0; j < output[0].length; j++) { //Loop through width
-                output[i][j] /= octaves;
-            }
-        }
-        ArrayTools.normalizeData(output, 1);
 
+        output = ArrayTools.normalizeData(output, 1);
         return output;
     }
 
@@ -90,7 +84,7 @@ public class NoiseGenerator {
     }
 
     public void setPersistence(double persistence) {
-        if (persistence > 1.0 && persistence < 0.0) {
+        if (persistence < 1.0 && persistence > 0.0) {
             this.persistence = persistence;
         } else {
             this.persistence = DEFAULT_PERSISTENCE;
@@ -110,6 +104,21 @@ public class NoiseGenerator {
             this.scale = scale;
         } else {
             this.scale = DEFAULT_SCALE;
+        }
+    }
+
+    public void setHeight(int height) {
+        if (height > 0) {
+            this.height = height;
+        } else {
+            this.height = DEFAULT_HEIGHT;
+        }
+    }
+    public void setWidth(int width) {
+        if (width > 0) {
+            this.width = width;
+        } else {
+            this.width = DEFAULT_WIDTH;
         }
     }
 }

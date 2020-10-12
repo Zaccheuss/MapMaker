@@ -43,7 +43,7 @@ public class NoiseMap {
                 output[i][j] = point;
             }
         }
-        return ArrayTools.normalizeData(output, 1);
+        return output;
     }
 
 

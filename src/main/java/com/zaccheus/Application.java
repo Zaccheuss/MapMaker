@@ -12,10 +12,10 @@ public class Application {
     public static void main(String[] args) {
 
         NoiseGenerator gen = new NoiseGenerator(
-                2.2,
-                0.7,
+                2.9,
+                .4,
                 4,
-                150,
+                160,
                 500,
                 500);
         MapWriter.generateColorImage(gen.combineArrays());

@@ -37,12 +37,6 @@ public class WaveGenerator {
                 output[i] += wave[i];
             }
         }
-        //Get the average of each point
-        for (int i = 0; i < output.length; i++) {
-            output[i] /= octaves;
-            output[i] *= scale; //Needs to be scaled up in order to print to console
-        }
-
         return output;
     }
 
