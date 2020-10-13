@@ -11,15 +11,18 @@ public class Application {
 
     public static void main(String[] args) {
 
-        NoiseGenerator gen = new NoiseGenerator(
-                2.9,
-                .4,
-                4,
-                50,
-                50,
-                150);
-//        MapWriter.generateColorImage(gen.combineArrays());
-        MapWriter.generateASCII(gen.combineArrays());
+        //Good inputs for ASCII map
+//        NoiseGenerator gen = new NoiseGenerator(
+//                2.9,
+//                .4,
+//                4,
+//                50,
+//                50,
+//                150);
+        NoiseGenerator gen  = new NoiseGenerator();
+
+        MapWriter.generateColorImage(gen.combineArrays());
+//        MapWriter.generateASCII(gen.combineArrays());
     }
 
 }

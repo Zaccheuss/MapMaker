@@ -7,12 +7,12 @@ import java.util.List;
 
 public class NoiseGenerator {
 
-    private static final int DEFAULT_WIDTH = 100;
-    private static final int DEFAULT_HEIGHT = 100;
-    private static final double DEFAULT_LACUNARITY = 2;
-    private static final double DEFAULT_PERSISTENCE = 0.5;
-    private static final int DEFAULT_OCTAVES = 5;
-    private static final int DEFAULT_SCALE = 20;
+    private static final int DEFAULT_WIDTH = 700;
+    private static final int DEFAULT_HEIGHT = 700;
+    private static final double DEFAULT_LACUNARITY = 2.9;
+    private static final double DEFAULT_PERSISTENCE = 0.4;
+    private static final int DEFAULT_OCTAVES = 4;
+    private static final int DEFAULT_SCALE = 160;
 
     private double lacunarity;  //Controls increase in frequency per octave
     private double persistence; //Controls decrease in amplitude per octave
