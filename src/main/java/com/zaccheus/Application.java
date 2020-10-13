@@ -20,8 +20,9 @@ public class Application {
 //                50,
 //                150);
         NoiseGenerator gen  = new NoiseGenerator();
+        double[][] generatedMap = gen.applyFalloffMap(gen.combineArrays());
 
-        MapWriter.generateColorImage(gen.combineArrays());
+        MapWriter.generateColorImage(generatedMap);
 //        MapWriter.generateASCII(gen.combineArrays());
     }
 

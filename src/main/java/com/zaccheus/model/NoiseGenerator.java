@@ -1,6 +1,7 @@
 package com.zaccheus.model;
 
 import com.zaccheus.util.ArrayTools;
+import com.zaccheus.util.MapTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,22 @@ public class NoiseGenerator {
 
         output = ArrayTools.normalizeData(output, 1);
         return output;
+    }
+
+    public double[][] applyFalloffMap(double[][] input) {
+        int height = input.length;
+        int width = input[0].length;
+        double[][] falloffMap = generateFalloffMap(height, width);
+        for (int i = 0; i < input.length; i++) { //Loop through height
+            for (int j = 0; j < input[0].length; j++) { //Loop through width
+                input[i][j] *= falloffMap[i][j];
+            }
+        }
+        return input;
+    }
+
+    private double[][] generateFalloffMap(int height, int width) {
+        return MapTools.createGaussian(height, width, 1.1, 230, 230);
     }
 
     private List<double[][]> generateMaps() {
