@@ -15,10 +15,11 @@ public class Application {
                 2.9,
                 .4,
                 4,
-                160,
-                1000,
-                1000);
-        MapWriter.generateColorImage(gen.combineArrays());
+                50,
+                50,
+                150);
+//        MapWriter.generateColorImage(gen.combineArrays());
+        MapWriter.generateASCII(gen.combineArrays());
     }
 
 }

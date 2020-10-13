@@ -36,7 +36,7 @@ public class NoiseGenerator {
     }
 
     public double[][] combineArrays() {
-        double[][] output = new double[height][width];
+        double[][] output = new double[width][height];
         List<double[][]> mapList = generateMaps();
         //Sum all arrays
         for (double[][] map : mapList) {

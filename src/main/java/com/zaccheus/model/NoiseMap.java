@@ -33,7 +33,7 @@ public class NoiseMap {
 
     //Generate noisemap based on inputs
     public double[][] generateOutputArray() {
-        double[][] output = new double[height][width];
+        double[][] output = new double[width][height];
 
         for (int i = 0; i < output.length; i++) { //Loop through height
             for (int j = 0; j < output[0].length; j++) { //Loop through width

@@ -51,6 +51,43 @@ public final class MapWriter {
         writeToImage(image, fileName);
     }
 
+    public static void generateASCII(double [][] data) {
+        StringBuilder output = new StringBuilder();
+
+        for (int y = 0; y < data[0].length; y++) {
+            for (int x = 0; x < data.length; x++) {
+                if (data[x][y] > 1) {
+                    data[x][y] = 1;
+                }
+                if (data[x][y] < 0) {
+                    data[x][y] = 0;
+                }
+
+                if (data[x][y] < 0.30) {
+                    output.append(" ");
+                } else if (data[x][y] < 0.38) {
+                    output.append(".");
+                }  else if (data[x][y] < 0.44) {
+                    output.append(":");
+                } else if (data[x][y] < 0.46) {
+                    output.append("-");
+                } else if (data[x][y] < 0.60) {
+                    output.append("=");
+                } else if (data[x][y] < 0.65) {
+                    output.append("+");
+                } else if (data[x][y] < 0.7) {
+                    output.append("*");
+                } else if (data[x][y] < 0.8) {
+                    output.append("#");
+                } else {
+                    output.append("%");
+                }
+            }
+            output.append("\n");
+        }
+        System.out.println(output);
+    }
+
     private static void writeToImage(BufferedImage image, String fileName) {
         try {
             Path outputFile = Paths.get(fileName + ".png");
