@@ -22,6 +22,8 @@ public final class WaveWriter {
 
     private static String[][] generateHorizontal2DArray(double[] data) {
         int[] wave = doubleArrayToIntArray(data);
+        int test1 = wave.length;
+        int test2 = ArrayTools.findArrayMax(wave);
         String[][] waveForPrinting = new String[wave.length][ArrayTools.findArrayMax(wave)];
         for (int x = 0; x < waveForPrinting.length; x++) {
             for (int y = 0; y < waveForPrinting[x].length; y++) {

@@ -1,5 +1,7 @@
 package com.zaccheus.model;
 
+import com.zaccheus.util.ArrayTools;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,9 +36,10 @@ public class WaveGenerator {
         //Sum all arrays
         for (double[] wave : waveList) {
             for (int i = 0; i < output.length; i++) {
-                output[i] += wave[i];
+                output[i] += wave[i] * (scale / octaves);
             }
         }
+//        output = ArrayTools.normalizeData(output, 20);
         return output;
     }
 
@@ -51,6 +54,15 @@ public class WaveGenerator {
             waveList.add(new SineWave(ampArr[i], freqArr[i], phaseArr[i]).generateOutputArray());
         }
         return waveList;
+    }
+
+    public int[] generateRandomArray() {
+        int[] arr = new int[octaves];
+        Random rand = new Random();
+        for (int i = 0; i < octaves; i++) {
+            arr[i] = rand.nextInt(16);
+        }
+        return arr;
     }
 
     public double[] generateFrequencyArray() {
@@ -85,7 +97,7 @@ public class WaveGenerator {
     }
 
     public void setPersistence(double persistence) {
-        if (persistence > 1.0 && persistence < 0.0) {
+        if (persistence < 1.0 && persistence > 0.0) {
             this.persistence = persistence;
         } else {
             this.persistence = DEFAULT_PERSISTENCE;
