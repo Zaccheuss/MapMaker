@@ -1,6 +1,7 @@
 package com.zaccheus.util;
 
 public final class ArrayTools {
+
     public static double[] normalizeData(double[] data, double newMaxValue) {
         double[] normalizedData = new double[data.length];
         double max = findArrayMax(data);

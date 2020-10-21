@@ -6,7 +6,12 @@ import com.zaccheus.util.MapTools;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoiseGenerator {
+/**
+ * An instance of this class is used to create and combine several {@link NoiseMap} instances
+ * to produce a single two dimensional array that can then be printed out to the console or
+ * as a color picture.
+ */
+public class MapGenerator {
 
     private static final int DEFAULT_WIDTH = 700;
     private static final int DEFAULT_HEIGHT = 700;
@@ -15,28 +20,51 @@ public class NoiseGenerator {
     private static final int DEFAULT_OCTAVES = 4;
     private static final int DEFAULT_SCALE = 160;
 
-    private double lacunarity;  //Controls increase in frequency per octave
-    private double persistence; //Controls decrease in amplitude per octave
+    private double lacunarity;
+    private double persistence;
     private int octaves;
     private int scale;
     private int height;
     private int width;
 
-    public NoiseGenerator() {
+    /**
+     * Creates a new map generator with default inputs
+     * <p>
+     * Use this if you want some good initial values for printing out a map
+     */
+    public MapGenerator() {
         this(DEFAULT_LACUNARITY, DEFAULT_PERSISTENCE, DEFAULT_OCTAVES, DEFAULT_SCALE,
                 DEFAULT_HEIGHT, DEFAULT_WIDTH);
     }
 
-    public NoiseGenerator(double lacunarity, double persistence, int octaves, int scale, int height, int width) {
+    /**
+     * Creates a new map generator with custom inputs
+     * <p>
+     * Use this if you want to further edit map attributes.
+     * @param lacunarity increases the frequency every octave, typically 2 or greater
+     * @param persistence decreases the frequency every octave, typically less than 1
+     * @param octaves amount of maps that will be generated and added togethers, typically 4-6
+     * @param scale how zoomed in or zoomed out the map is, typically 150
+     * @param height height in pixels
+     * @param width width in pixels
+     */
+    public MapGenerator(double lacunarity, double persistence, int octaves, int scale, int height, int width) {
         setLacunarity(lacunarity);
         setPersistence(persistence);
         setOctaves(octaves);
         setScale(scale);
-        this.height = height;
-        this.width = width;
+        setHeight(height);
+        setWidth(width);
     }
 
-    public double[][] combineArrays() {
+    /**
+     * Generate a height map based on this map generators settings
+     * <p>
+     * <pre>{@code MapGenerator gen = new MapGenerator();
+     * double[][] mapToBePrinted = gen.generateMap();}</pre>
+     * @return two dimensional array of elements normalized between 0 and 1
+     */
+    public double[][] generateMap(boolean applyFalloffMap) {
         double[][] output = new double[width][height];
         List<double[][]> mapList = generateMaps();
         //Sum all arrays
@@ -49,25 +77,14 @@ public class NoiseGenerator {
         }
 
         output = ArrayTools.normalizeData(output, 1);
+        if (applyFalloffMap) {
+            MapTools.applyFalloffMap(output);
+        }
+
         return output;
     }
 
-    public double[][] applyFalloffMap(double[][] input) {
-        int height = input.length;
-        int width = input[0].length;
-        double[][] falloffMap = generateFalloffMap(height, width);
-        for (int i = 0; i < input.length; i++) { //Loop through height
-            for (int j = 0; j < input[0].length; j++) { //Loop through width
-                input[i][j] *= falloffMap[i][j];
-            }
-        }
-        return input;
-    }
-
-    private double[][] generateFalloffMap(int height, int width) {
-        return MapTools.createGaussian(height, width, 1.1, 230, 230);
-    }
-
+    //Generate a number of maps (based on number of octaves) with decreasing amplitude and increasing frequency
     private List<double[][]> generateMaps() {
         double[] freqArr = generateFrequencyArray();
         double[] ampArr = generateAmplitudeArray();
@@ -79,6 +96,7 @@ public class NoiseGenerator {
         return mapList;
     }
 
+    //Generate an array of frequencies based on the lacunarity value
     public double[] generateFrequencyArray() {
         double[] freqArr = new double[octaves];
         for (int i = 0; i < octaves; i++) {
@@ -87,6 +105,7 @@ public class NoiseGenerator {
         return freqArr;
     }
 
+    //Generate an array of amplitudes based on the persistence value
     public double[] generateAmplitudeArray() {
         double[] ampArr = new double[octaves];
         for (int i = 0; i < octaves; i++) {
@@ -101,11 +120,7 @@ public class NoiseGenerator {
     }
 
     public void setPersistence(double persistence) {
-        if (persistence < 1.0 && persistence > 0.0) {
-            this.persistence = persistence;
-        } else {
-            this.persistence = DEFAULT_PERSISTENCE;
-        }
+        this.persistence = DEFAULT_PERSISTENCE;
     }
 
     public void setOctaves(int octaves) {
@@ -117,11 +132,7 @@ public class NoiseGenerator {
     }
 
     public void setScale(int scale) {
-        if (scale > 0) {
-            this.scale = scale;
-        } else {
-            this.scale = DEFAULT_SCALE;
-        }
+        this.scale = scale;
     }
 
     public void setHeight(int height) {
