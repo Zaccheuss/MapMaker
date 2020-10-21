@@ -2,7 +2,10 @@ package com.zaccheus.model;
 
 import com.zaccheus.util.ArrayTools;
 
-public class SineWave {
+/**
+ * An instance of this class represents a sine wave
+ */
+public class Wave {
 
     private static final double DEFAULT_AMP = 10;
     private static final double DEFAULT_FREQ = 1;
@@ -18,20 +21,47 @@ public class SineWave {
     private int start;
     private final int end;
 
-    public SineWave() {
+    /**
+     * Creates a new wave with default inputs
+     * <p>
+     * Use this if you want some good initial values for printing out a wave
+     */
+    public Wave() {
         this(DEFAULT_AMP, DEFAULT_FREQ, DEFAULT_PHASE, DEFAULT_POINTS, DEFAULT_START, DEFAULT_END);
     }
 
-    public SineWave(int numberOfDataPoints) {
+    /**
+     * Creates a new wave with a specified number of points
+     * <p>
+     * Use this if you want to more or less resolution (more points generated between the start
+     * and end values)
+     * @param numberOfDataPoints number of points in between the start and end values
+     */
+    public Wave(int numberOfDataPoints) {
         this(DEFAULT_AMP, DEFAULT_FREQ, DEFAULT_PHASE, numberOfDataPoints, DEFAULT_START, DEFAULT_END);
     }
 
-    public SineWave(double amplitude, double frequency, double phase) {
+    /**
+     * Creates a new wave with a specified amplitude, frequency, and phase
+     * @param amplitude "height" of the wave
+     * @param frequency how close or far apart the peaks of the wave are
+     * @param phase shift the wave along the x axis
+     */
+    public Wave(double amplitude, double frequency, double phase) {
         this(amplitude, frequency, phase, DEFAULT_POINTS, DEFAULT_START, DEFAULT_END);
     }
 
-    public SineWave(double amplitude, double frequency, double phase, int numberOfDataPoints,
-                             int start, int end) {
+    /**
+     * Creates a new wave with custom inputs
+     * @param amplitude "height" of the wave
+     * @param frequency how close or far apart the peaks of the wave are
+     * @param phase shift the wave along the x axis
+     * @param numberOfDataPoints number of points in between the start and end values
+     * @param start start value of the wave
+     * @param end end value of the wave
+     */
+    public Wave(double amplitude, double frequency, double phase, int numberOfDataPoints,
+                int start, int end) {
         this.amplitude = amplitude;
         this.frequency = frequency;
         this.phase = phase;
@@ -51,7 +81,11 @@ public class SineWave {
         }
     }
 
-    //Generate waveform based on inputs
+    /**
+     * Creates a one dimensional array using the inputs of this class and the
+     * sin(x) function
+     * @return array with the output of a sin(x) function
+     */
     public double[] generateOutputArray() {
         double[] output = new double[numberOfDataPoints];
         double[] input = generateInputArray();
@@ -64,7 +98,8 @@ public class SineWave {
         return output;
     }
 
-    //Generate values equally spaced between the start and end values and the number of data points
+    //Generate "x" values equally spaced between the start and end values given the
+    // number of data points
     private double[] generateInputArray() {
         double[] input = new double[numberOfDataPoints];
         input[0] = start;

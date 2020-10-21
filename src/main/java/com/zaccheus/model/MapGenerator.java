@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * An instance of this class is used to create and combine several {@link NoiseMap} instances
  * to produce a single two dimensional array that can then be printed out to the console or
- * as a color picture.
+ * as a color picture using the {@link com.zaccheus.writer.MapWriter} class
  */
 public class MapGenerator {
 
@@ -120,7 +120,7 @@ public class MapGenerator {
     }
 
     public void setPersistence(double persistence) {
-        this.persistence = DEFAULT_PERSISTENCE;
+        this.persistence = persistence;
     }
 
     public void setOctaves(int octaves) {
@@ -142,6 +142,7 @@ public class MapGenerator {
             this.height = DEFAULT_HEIGHT;
         }
     }
+
     public void setWidth(int width) {
         if (width > 0) {
             this.width = width;

@@ -8,7 +8,6 @@ import java.util.Random;
 /**
  * An instance of this class represents a two dimensional array created through
  * classes in the noise package.
- *
  */
 public class NoiseMap {
 
