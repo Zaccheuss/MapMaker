@@ -2,14 +2,26 @@ package com.zaccheus.writer;
 
 import com.zaccheus.util.ArrayTools;
 
+/**
+ * This is a utility class for printing waves to the console. There is an option to
+ * print the wave vertically (along the y-axis) or horizontally (along the x-axis).
+ */
 public final class WaveWriter {
 
-    public static void printWaveToConsoleVertically(double[] data) {
-        for (double point : data) {
+    /**
+     * Prints the wave to the console along the y-axis
+     * @param input array representing the wave
+     */
+    public static void printWaveToConsoleVertically(double[] input) {
+        for (double point : input) {
             System.out.println("*".repeat((int) point));
         }
     }
 
+    /**
+     * Prints the wave to the console along the x-axis
+     * @param input array representing the wave
+     */
     public static void printWaveToConsoleHorizontally(double[] input) {
         String[][] output = generateHorizontal2DArray(input);
         for (int i = 0; i < output.length; i++) {
@@ -20,8 +32,9 @@ public final class WaveWriter {
         }
     }
 
-    private static String[][] generateHorizontal2DArray(double[] data) {
-        int[] wave = doubleArrayToIntArray(data);
+    //Makes a 2d array so the wave can be printed horizontally
+    private static String[][] generateHorizontal2DArray(double[] input) {
+        int[] wave = doubleArrayToIntArray(input);
         int test1 = wave.length;
         int test2 = ArrayTools.findArrayMax(wave);
         String[][] waveForPrinting = new String[wave.length][ArrayTools.findArrayMax(wave)];
@@ -37,6 +50,8 @@ public final class WaveWriter {
         return transpose(waveForPrinting);
     }
 
+    //Turns a double array into an int array so we can print to the console.
+    // Some data is lost this way but it works for this application
     private static int[] doubleArrayToIntArray(double[] input) {
         int[] output = new int[input.length];
         for (int i = 0; i < input.length; i++) {
@@ -46,6 +61,8 @@ public final class WaveWriter {
         return output;
     }
 
+    //Transposes a given 2d string array.
+    // Useful for switching the wave from vertical to horizontal
     private static String[][] transpose(String[][] input) {
         int rows = input[0].length;
         int columns = input.length;
