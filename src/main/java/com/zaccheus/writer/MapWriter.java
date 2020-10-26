@@ -13,6 +13,8 @@ import java.nio.file.Paths;
  */
 public final class MapWriter {
 
+    private static final String IMAGES_FOLDER = "images/";
+
     /**
      * Writes the map to a color image with the name "saved-map.png"
      * @param input two dimensional array representing the map
@@ -109,7 +111,7 @@ public final class MapWriter {
     //Writes the image to specified file name
     private static void writeToImage(BufferedImage image, String fileName) {
         try {
-            Path outputFile = Paths.get(fileName + ".png");
+            Path outputFile = Paths.get(IMAGES_FOLDER + fileName + ".png");
             ImageIO.write(image, "png", outputFile.toFile());
         } catch (IOException e) {
             throw new RuntimeException("Failure to write to image file");
