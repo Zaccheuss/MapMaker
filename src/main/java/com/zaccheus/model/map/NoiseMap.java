@@ -1,4 +1,4 @@
-package com.zaccheus.model;
+package com.zaccheus.model.map;
 
 import com.zaccheus.noise.OpenSimplexNoise;
 import com.zaccheus.util.ArrayTools;

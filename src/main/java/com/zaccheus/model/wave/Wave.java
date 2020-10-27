@@ -1,4 +1,4 @@
-package com.zaccheus.model;
+package com.zaccheus.model.wave;
 
 import com.zaccheus.util.ArrayTools;
 

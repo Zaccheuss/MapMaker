@@ -1,4 +1,4 @@
-package com.zaccheus.model;
+package com.zaccheus.model.wave;
 
 import java.util.ArrayList;
 import java.util.List;

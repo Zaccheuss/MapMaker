@@ -1,5 +1,6 @@
 package com.zaccheus.model;
 
+import com.zaccheus.model.wave.WaveGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 

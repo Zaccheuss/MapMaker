@@ -1,4 +1,4 @@
-package com.zaccheus.model;
+package com.zaccheus.model.map;
 
 import com.zaccheus.util.ArrayTools;
 import com.zaccheus.util.MapTools;

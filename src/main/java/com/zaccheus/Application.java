@@ -1,7 +1,7 @@
 package com.zaccheus;
 
-import com.zaccheus.model.MapGenerator;
-import com.zaccheus.model.WaveGenerator;
+import com.zaccheus.model.map.MapGenerator;
+import com.zaccheus.model.wave.WaveGenerator;
 import com.zaccheus.writer.MapWriter;
 import com.zaccheus.writer.WaveWriter;
 
