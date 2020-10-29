@@ -1,5 +1,7 @@
 package com.zaccheus.writer;
 
+import com.zaccheus.model.map.Tile;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,6 +14,19 @@ import java.nio.file.Paths;
  * console in ASCII.
  */
 public final class MapWriter {
+
+
+    public static void generateTileImage(Tile[][] input) {
+        BufferedImage image = new BufferedImage(input.length, input[0].length, BufferedImage.TYPE_INT_RGB);
+
+        for (int y = 0; y < input[0].length; y++) {
+            for (int x = 0; x < input.length; x++) {
+                image.setRGB(x, y, input[x][y].getColor());
+            }
+
+            writeToImage(image, "TileMap");
+        }
+    }
 
     /**
      * Writes the map to a color image with the name "saved-map.png"

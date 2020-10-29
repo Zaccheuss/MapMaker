@@ -18,6 +18,7 @@ public class Tile {
     public Biome getBiome() {
         Biome biome = null;
 
+        //Height will always determine mountains and oceans, temp and humidity don't effect this
         if (height < DEEP_OCEAN_HEIGHT) {
             biome = DEEP_OCEAN;
         } else if (height < OCEAN_HEIGHT) {
@@ -26,10 +27,49 @@ public class Tile {
             biome = SHALLOW_OCEAN;
         } else if (height > MOUNTAIN_HEIGHT) {
             biome = MOUNTAIN;
-        }
+        } else {
 
-        if (biome == null) {
-            biome = SUBTROPICAL_DESERT; //Testing the above if statements
+            if (temperature < 0.25) {
+                if (humidity < 0.167) {
+                    biome = SCORCHED;
+                } else if (humidity < 0.333) {
+                    biome = BARE;
+                } else if (humidity < 0.500) {
+                    biome = TUNDRA;
+                } else if (humidity >= 0.500) {
+                    biome = SNOW;
+                }
+            } else if (temperature < 0.50) {
+                if (humidity < 0.333) {
+                    biome = TEMPERATE_DESERT;
+                } else if (humidity < 0.667) {
+                    biome = SHRUBLAND;
+                } else if (humidity >= 0.667) {
+                    biome = TIAGA;
+                }
+            } else if (temperature < 0.75) {
+                if (humidity < 0.167) {
+                    biome = TEMPERATE_DESERT;
+                } else if (humidity < 0.5) {
+                    biome = GRASSLAND;
+                } else if (humidity < 0.833) {
+                    biome = TEMP_DECIDUOUS_FOREST;
+                } else if (humidity >= 0.833) {
+                    biome = TEMPERATE_RAINFOREST;
+                }
+            } else if (temperature >= 0.75) {
+                if (humidity < 0.167) {
+                    biome = SUBTROPICAL_DESERT;
+                } else if (humidity < 0.333) {
+                    biome = GRASSLAND;
+                } else if (humidity < 0.667) {
+                    biome = TROPICAL_SEASONAL_FOREST;
+                } else if (humidity >= 0.667) {
+                    biome = TROPICAL_RAINFOREST;
+                }
+            } else {
+                System.out.println("I've made a huge mistake");
+            }
         }
 
         return biome;
@@ -39,5 +79,8 @@ public class Tile {
         return getBiome().getBiomeColor(getBiome());
     }
 
+    public void setHeight(double height) {
+        this.height = height;
+    }
 
 }
