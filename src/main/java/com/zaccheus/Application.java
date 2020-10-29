@@ -30,7 +30,7 @@ public class Application {
         MapWriter.generateASCII(asciiGen.generateMap(false));
 
         //Generate and save to the image TileMap.png a map using tiles
-        MapCombiner combiner = new MapCombiner();
+        MapCombiner combiner = new MapCombiner(700, 1400, true);
         MapWriter.generateTileImage(combiner.generateTileMap());
 
     }

@@ -37,11 +37,11 @@ public final class MapTools {
      * @return two dimensional array
      */
     public static double[][] applyFalloffMap(double[][] input, double amplitude, double sigma_x, double sigma_y) {
-        int height = input.length;
-        int width = input[0].length;
+        int height = input[0].length;
+        int width = input.length;
         double[][] falloffMap = createGaussian(height, width, amplitude, sigma_x, sigma_y);
-        for (int i = 0; i < input.length; i++) { //Loop through height
-            for (int j = 0; j < input[0].length; j++) { //Loop through width
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 input[i][j] *= falloffMap[i][j];
             }
         }
