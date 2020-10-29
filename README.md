@@ -10,6 +10,9 @@ The project is in a working state, but I am still working on adding more feature
  experiment with procedural generation.
 
 ## Screen Shots
+
+![Example map generation with equator and biomes](images/sample-biome-map.png)
+
 ![Example map generation](images/sample_map.png)
 
 ![Example island map generation](images/sample_island_map.png)

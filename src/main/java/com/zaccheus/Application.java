@@ -1,7 +1,8 @@
 package com.zaccheus;
 
-import com.zaccheus.model.MapGenerator;
-import com.zaccheus.model.WaveGenerator;
+import com.zaccheus.model.MapCombiner;
+import com.zaccheus.model.map.MapGenerator;
+import com.zaccheus.model.wave.WaveGenerator;
 import com.zaccheus.writer.MapWriter;
 import com.zaccheus.writer.WaveWriter;
 
@@ -27,6 +28,10 @@ public class Application {
         System.out.println("\n\n\n\n"); //Space this out after the wave is printed
         MapGenerator asciiGen = new MapGenerator(2.9, 0.4, 4, 40, 50, 150);
         MapWriter.generateASCII(asciiGen.generateMap(false));
+
+        //Generate and save to the image TileMap.png a map using tiles
+        MapCombiner combiner = new MapCombiner(700, 1400, true);
+        MapWriter.generateTileImage(combiner.generateTileMap());
 
     }
 
