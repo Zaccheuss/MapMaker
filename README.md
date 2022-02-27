@@ -28,8 +28,8 @@ I started this project after seeing a procedural map generator somebody had buil
  
 #### Things to Add / Further Research
 I am still experimenting with:
- - Using temperature and humidity maps along with a height map to create biomes.
- - Adding in an equator to make the map warmer in the middle and colder at the poles.
+ - ~~Using temperature and humidity maps along with a height map to create biomes.~~
+ - ~~Adding in an equator to make the map warmer in the middle and colder at the poles.~~
  - Simulating rivers, wind, and sea currents. Possibly looking at simulating erosion over time.
  - Procedurally placing cities/empires.
  - Ability to edit the map by raising and lowering terrain. Probably need to use some sort of game engine to
